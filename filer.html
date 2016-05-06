@@ -1,0 +1,210 @@
+<div class="container">
+	<div ng-include="'navigationbar.html'"/>
+ 	<div class="row">
+ 		<div class="col-md-12">
+ 			<h3 class="text-center filers">{{filer.filingManager.name}}</h3>
+			<form class="form">
+				<div class="col-md-5">
+					<div class="panel panel-success" ng-if="filer.filingManager.address">
+						<div id="address-toggle" class="panel-heading" data-toggle="collapse" data-target="#address">Address<i class="glyphicon glyphicon-collapse-down pull-right"/></div>
+						<script>
+							$('#address').on('show.bs.collapse', function(){
+								$('#address-toggle > i').removeClass('glyphicon-collapse-down').addClass('glyphicon-collapse-up');
+							});  
+							$('#address').on('hide.bs.collapse', function(){
+								$('#address-toggle > i').removeClass('glyphicon-collapse-up').addClass('glyphicon-collapse-down');
+							});
+						</script>
+						<div id="address" class="panel-body panel-collapse collapse">
+							<div class="form-group">
+								<div class="form-control-static">
+									<p>
+										{{filer.filingManager.address.street1}}
+									</p>
+									<p ng-if="filer.filingManager.address.street2.length > 0">
+										{{filer.filingManager.address.street2}}
+									</p>
+									<p>
+										<span ng-if="filer.filingManager.address.city.length > 0">{{filer.filingManager.address.city}},&nbsp;</span>
+										<span ng-if="filer.filingManager.address.stateOrCountry.length > 0">{{filer.filingManager.address.stateOrCountry}}&nbsp;&nbsp;</span>
+										<span ng-if="filer.filingManager.address.zipCode.length > 0">{{filer.filingManager.address.zipCode}}</span>
+									</p>	
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-5 col-md-offset-2">
+					<div class="panel panel-success">
+						<div id="filing-toggle" class="panel-heading" data-toggle="collapse" data-target="#filingInformation">13F Filing Information<i class="glyphicon glyphicon-collapse-down pull-right"/></div>
+						<div id="filingInformation" class="panel-body panel-collapse collapse">
+						<script>
+							$('#filingInformation').on('show.bs.collapse', function(){
+								$('#filing-toggle > i').removeClass('glyphicon-collapse-down').addClass('glyphicon-collapse-up');
+							});  
+							$('#filingInformation').on('hide.bs.collapse', function(){
+								$('#filing-toggle > i').removeClass('glyphicon-collapse-up').addClass('glyphicon-collapse-down');
+							});
+						</script>
+							<div class="form-group">
+								<label for="submissionType" class="control-label filers">Submission Type</label>
+								<p id="submissionType" class="form-control-static">{{filer.submissionType}}</p>
+							</div>
+							<div class="form-group">
+								<label for="periodOfReport" class="control-label filers">Period Of Report</label>
+								<p id="periodOfReport" class="form-control-static">{{filer.periodOfReport | date:'MMMM dd, yyyy'}}</p>
+							</div>
+							<div class="form-group">
+								<label for="reportCalendarOrQuarter" class="control-label filers">Report Calendar / Quarter</label>
+								<p id="reportCalendarOrQuarter" class="form-control-static">{{filer.reportCalendarOrQuarter | date:'MMMM dd, yyyy'}}</p>
+							</div>
+							<div class="form-group">
+								<label for="form13FFileNumber" class="control-label filers">Form 13F File Number</label>
+								<p id="form13FFileNumber" class="form-control-static">{{filer.form13FFileNumber}}</p>
+							</div>
+							<div class="form-group">
+								<a ng-href="{{filer.url}}" id="filerUrl" target="_blank" class="btn btn-success btn-block form-control"><span class="successButtonText">13F Submission File</span></a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+      				<input ng-model="query" type="text" placeholder="Filter" class="form-control" autofocus>
+      			</div>
+    		</form>
+    		<div class="table-responsive">
+    			<table class="table table-striped">
+    				<thead class="tableHeader">
+    					<tr>
+	    					<th>
+	    						<div class="btn btn-group">
+		    						<button type="button" class="btn btn-success btn-block dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+		    							Name Of Issuer&nbsp;
+		    							<span class="caret"></span>
+										<span class="sr-only">Toggle Dropdown</span>    						
+	  								</button>
+		    						<ul class="dropdown-menu" role="menu">
+		    							<li>
+		    								<a ng-href="#"
+		    									class="btn"
+		    									ng-click="orderByField='nameOfIssuerLC'; reverseSort = false" 
+	    										onclick="return false;">
+	    											A to Z
+	    									</a>
+	    								</li>
+		    							<li>
+		    								<a ng-href="#"
+		    									class="btn"
+		    									ng-click="orderByField='nameOfIssuerLC'; reverseSort = true" 
+	    										onclick="return false;">
+	    											Z to A
+	    									</a>
+	    								</li>
+		    						</ul>
+	    						</div>
+	    					</th>
+    						<th>
+	    						<div class="btn btn-group">
+		    						<button type="button" class="btn btn-success btn-block dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+		    							Class&nbsp;
+		    							<span class="caret"></span>
+										<span class="sr-only">Toggle Dropdown</span>    						
+	  								</button>
+		    						<ul class="dropdown-menu" role="menu">
+		    							<li>
+		    								<a ng-href="#"
+		    									class="btn"
+		    									ng-click="orderByField='titleOfClass'; reverseSort = false" 
+	    										onclick="return false;">
+	    											A to Z
+	    									</a>
+	    								</li>
+		    							<li>
+		    								<a ng-href="#"
+		    									class="btn"
+		    									ng-click="orderByField='titleOfClass'; reverseSort = true" 
+	    										onclick="return false;">
+	    											Z to A
+	    									</a>
+	    								</li>
+		    						</ul>
+	    						</div>
+    						</th>
+    						<th>
+	    						<div class="btn btn-group">
+		    						<button type="button" class="btn btn-success btn-block dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+		    							CUSIP&nbsp;
+		    							<span class="caret"></span>
+										<span class="sr-only">Toggle Dropdown</span>    						
+	  								</button>
+		    						<ul class="dropdown-menu" role="menu">
+		    							<li>
+		    								<a ng-href="#"
+		    									class="btn"
+		    									ng-click="orderByField='cusip'; reverseSort = false" 
+	    										onclick="return false;">
+	    											A to Z
+	    									</a>
+	    								</li>
+		    							<li>
+		    								<a ng-href="#"
+		    									class="btn"
+		    									ng-click="orderByField='cusip'; reverseSort = true" 
+	    										onclick="return false;">
+	    											Z to A
+	    									</a>
+	    								</li>
+		    						</ul>
+	    						</div>
+    						</th>
+    						<th class="text-right">
+	    						<div class="btn btn-group">
+		    						<button type="button" class="btn btn-success btn-block dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+		    							Market Value&nbsp;
+		    							<span class="caret"></span>
+										<span class="sr-only">Toggle Dropdown</span>    						
+	  								</button>
+		    						<ul class="dropdown-menu" role="menu">
+		    							<li>
+		    								<a ng-href="#"
+		    									class="btn"
+		    									ng-click="orderByField='value'; reverseSort = true" 
+	    										onclick="return false;">
+	    											Largest to Smallest
+	    									</a>
+	    								</li>
+		    							<li>
+		    								<a ng-href="#"
+		    									class="btn"
+		    									ng-click="orderByField='value'; reverseSort = false" 
+	    										onclick="return false;">
+	    											Smallest to Largest
+	    									</a>
+	    								</li>
+		    						</ul>
+	    						</div>
+    						</th>
+    					<tr>
+    				</thead>
+    				<tbody>
+				 		<tr ng-repeat="holding in filer.informationTable.infoTable | filter:query | orderBy: orderByField : reverseSort | limitTo: rowsPerPage * page | limitTo: rowsPerPage * page < rowCount ? -rowsPerPage : -(rowsPerPage - (rowsPerPage * page - rowCount))">
+				 			<td><a ng-href="/cusipView/{{holding.cusip}}/currentValue/-" class="list-group-item">{{holding.nameOfIssuer}}</a></td>
+				 			<td><a ng-href="/cusipView/{{holding.cusip}}/currentValue/-" class="list-group-item">{{holding.titleOfClass}}</a></td>
+				 			<td><a ng-href="/cusipView/{{holding.cusip}}/currentValue/-" class="list-group-item">{{holding.cusip}}</a></td>
+				 			<td class="text-right"><a ng-href="/cusipView/{{holding.cusip}}/currentValue/-" class="list-group-item">${{holding.value | number:0}},000</a></td>
+				 		</tr>
+    				</tbody>
+    			</table>
+    			<div class="text-center">
+	    			<ul class="pagination">
+    					<li ng-repeat="i in pageRange" ng-show="i <= -1*Math.floor(-1*(filer.informationTable.infoTable | filter:query).length/rowsPerPage)">
+    						<a ng-href="#" ng-click="setPage(i)" onclick="return false;">
+	    						<span class="filers">{{i}}</span>
+    						</a>
+    					</li>
+    				</ul>
+    			</div>
+    		</div>
+		</div>
+	</div>
+</div>

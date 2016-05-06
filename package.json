@@ -1,0 +1,19 @@
+{
+  "name": "BigFishStockTrading",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+	"cheerio": "latest",
+    "express": "3.2.6",
+    "http": "latest",
+    "jade": "*",
+    "mongodb": "latest",
+    "mongoose": "latest",
+    "request": "latest",
+    "seo": "latest",
+    "util": "latest"
+  }
+}

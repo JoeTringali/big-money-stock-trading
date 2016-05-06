@@ -1,0 +1,205 @@
+<div class="container">
+	<div ng-include="'navigationbar.html'"/>
+ 	<div class="row">
+ 		<div class="col-md-12">
+ 			<h3 class="text-center filers">{{cusip.value.nameOfIssuer}}</h3>
+			<form class="form">
+				<div class="col-md-12">
+					<div class="panel panel-success">
+						<div id="cusip-toggle" class="panel-heading" data-toggle="collapse" data-target="#cusipPanel">CUSIP Information<i class="glyphicon glyphicon-collapse-down pull-right"/></div>
+						<script>
+							$('#cusipPanel').on('show.bs.collapse', function(){
+								$('#cusip-toggle > i').removeClass('glyphicon-collapse-down').addClass('glyphicon-collapse-up');
+							});  
+							$('#cusipPanel').on('hide.bs.collapse', function(){
+								$('#cusip-toggle > i').removeClass('glyphicon-collapse-up').addClass('glyphicon-collapse-down');
+							});
+						</script>
+						<div id="cusipPanel" class="panel-body panel-collapse collapse">
+							<div class="form-group">
+								<label for="cusip" class="control-label filers">CUSIP</label>
+								<p id="cusip" class="form-control-static">{{cusip._id.cusip}}</p>
+							</div>
+							<div class="form-group">
+								<label for="titleOfClassType" class="control-label filers">Class</label>
+								<p id="titleOfClassType" class="form-control-static">{{cusip.value.titleOfClass}}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+      				<input ng-model="query" type="text" placeholder="Filter" class="form-control" autofocus>
+      			</div>
+    		</form>
+    		<div class="table-responsive">
+    			<table class="table table-striped">
+    				<thead class="tableHeader">
+    					<tr>
+	    					<th>
+	    						<div class="btn btn-group">
+		    						<button type="button" class="btn btn-success btn-block dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+		    							Name of Filer&nbsp;
+		    							<span class="caret"></span>
+										<span class="sr-only">Toggle Dropdown</span>    						
+	  								</button>
+		    						<ul class="dropdown-menu" role="menu">
+		    							<li>
+		    								<a ng-href="#"
+		    									class="btn"
+		    									ng-click="orderByField='value.filingManagerNameLC'; reverseSort = false" 
+	    										onclick="return false;">
+	    											A to Z
+	    									</a>
+	    								</li>
+		    							<li>
+		    								<a ng-href="#"
+		    									class="btn"
+		    									ng-click="orderByField='value.filingManagerNameLC'; reverseSort = true" 
+	    										onclick="return false;">
+	    											Z to A
+	    									</a>
+	    								</li>
+		    						</ul>
+	    						</div>
+	    					</th>
+    						<th class="text-right">
+	    						<div class="btn btn-group">
+		    						<button type="button" class="btn btn-success btn-block dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+		    							Current Market Value&nbsp;
+		    							<span class="caret"></span>
+										<span class="sr-only">Toggle Dropdown</span>    						
+	  								</button>
+		    						<ul class="dropdown-menu" role="menu">
+		    							<li>
+		    								<a ng-href="#"
+		    									class="btn"
+		    									ng-click="orderByField='value.currentValue'; reverseSort = true" 
+	    										onclick="return false;">
+	    											Largest to Smallest
+	    									</a>
+	    								</li>
+		    							<li>
+		    								<a ng-href="#"
+		    									class="btn"
+		    									ng-click="orderByField='value.currentValue'; reverseSort = false" 
+	    										onclick="return false;">
+	    											Smallest to Largest
+	    									</a>
+	    								</li>
+		    						</ul>
+	    						</div>
+    						</th>
+    						<th class="text-right">
+	    						<div class="btn btn-group">
+		    						<button type="button" class="btn btn-success btn-block dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+		    							Prior Market Value&nbsp;
+		    							<span class="caret"></span>
+										<span class="sr-only">Toggle Dropdown</span>    						
+	  								</button>
+		    						<ul class="dropdown-menu" role="menu">
+		    							<li>
+		    								<a ng-href="#"
+		    									class="btn"
+		    									ng-click="orderByField='value.previousValue'; reverseSort = true" 
+	    										onclick="return false;">
+	    											Largest to Smallest
+	    									</a>
+	    								</li>
+		    							<li>
+		    								<a ng-href="#"
+		    									class="btn"
+		    									ng-click="orderByField='value.previousValue'; reverseSort = false" 
+	    										onclick="return false;">
+	    											Smallest to Largest
+	    									</a>
+	    								</li>
+		    						</ul>
+	    						</div>
+    						</th>
+    						<th class="text-right">
+	    						<div class="btn btn-group">
+		    						<button type="button" class="btn btn-success btn-block dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+		    							Net Change&nbsp;
+		    							<span class="caret"></span>
+										<span class="sr-only">Toggle Dropdown</span>    						
+	  								</button>
+		    						<ul class="dropdown-menu" role="menu">
+		    							<li>
+		    								<a ng-href="#"
+		    									class="btn"
+		    									ng-click="orderByField='value.totalValueDifference'; reverseSort = true" 
+	    										onclick="return false;">
+	    											Largest to Smallest
+	    									</a>
+	    								</li>
+		    							<li>
+		    								<a ng-href="#"
+		    									class="btn"
+		    									ng-click="orderByField='value.totalValueDifference'; reverseSort = false" 
+	    										onclick="return false;">
+	    											Smallest to Largest
+	    									</a>
+	    								</li>
+		    						</ul>
+	    						</div>
+    						</th>
+    					<tr>
+    				</thead>
+    				<tbody>
+				 		<tr ng-repeat="filer in filers | filter:query | orderBy: orderByField : reverseSort | limitTo: rowsPerPage * page | limitTo: rowsPerPage * page < rowCount ? -rowsPerPage : -(rowsPerPage - (rowsPerPage * page - rowCount))">
+				 			<td><a ng-href="/filerView/{{filer._id.cik}}" class="list-group-item">{{filer.value.filingManagerName}}</a></td>
+				 			<td class="text-right">
+				 				<a ng-href="/filerView/{{filer._id.cik}}" class="list-group-item">
+				 				<span ng-if="filer.value.currentValue > 0">
+				 					${{filer.value.currentValue | number:0}},000
+				 				</span>
+				 				<span ng-if="filer.value.currentValue === null || filer.value.currentValue === 0">
+				 					$0
+				 				</span>
+				 				<span ng-if="filer.value.currentValue < 0">
+				 					(${{filer.value.currentValue * -1 | number:0}},000)
+				 				</span>
+				 				</a>
+				 			</td>
+				 			<td class="text-right">
+				 				<a ng-href="/filerView/{{filer._id.cik}}" class="list-group-item">
+				 				<span ng-if="filer.value.previousValue > 0">
+				 					${{filer.value.previousValue | number:0}},000
+				 				</span>
+				 				<span ng-if="filer.value.previousValue === null || filer.value.previousValue === 0">
+				 					$0
+				 				</span>
+				 				<span ng-if="filer.value.previousValue < 0">
+				 					(${{filer.value.previousValue * -1 | number:0}},000)
+				 				</span>
+				 				</a>
+				 			</td>
+				 			<td class="text-right">
+				 				<a ng-href="/filerView/{{filer._id.cik}}" class="list-group-item">
+				 				<span ng-if="filer.value.totalValueDifference > 0">
+				 					${{filer.value.totalValueDifference | number:0}},000
+				 				</span>
+				 				<span ng-if="filer.value.totalValueDifference === 0">
+				 					$0
+				 				</span>
+				 				<span ng-if="filer.value.totalValueDifference < 0">
+				 					(${{filer.value.totalValueDifference * -1 | number:0}},000)
+				 				</span>
+				 				</a>
+				 			</td>
+				 		</tr>
+    				</tbody>
+    			</table>
+    			<div class="text-center">
+	    			<ul class="pagination">
+    					<li ng-repeat="i in pageRange" ng-show="i <= -1*Math.floor(-1*(filers | filter:query).length/rowsPerPage)">
+    						<a ng-href="#" ng-click="setPage(i)" onclick="return false;">
+	    						<span class="filers">{{i}}</span>
+    						</a>
+    					</li>
+    				</ul>
+    			</div>
+    		</div>
+		</div>
+	</div>
+</div>

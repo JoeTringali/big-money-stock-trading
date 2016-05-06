@@ -1,0 +1,26 @@
+    <div class="navbar navbar-default">
+    	<div class="container-fluid">
+			<div class="navbar-header">
+          		<button
+          			type="button"
+          			class="navbar-toggle"
+          			data-toggle="collapse"
+          			data-target="#navbar-content">
+		            <span class="icon-bar"/>
+            		<span class="icon-bar"/>
+            		<span class="icon-bar"/>
+          		</button>
+				<a class="navbar-brand" ng-href="#">
+					<span class="title">Big Money <span class="dollar">$</span>tock Trading</span></a>
+			</div>
+			<div class="collapse navbar-collapse pull-right" id="navbar-content">
+            	<ul class="nav navbar-nav">
+					<li ng-class="activeView === 'about' ? 'active' : ''"><a ng-href="#/about/about"><span class="filers">About</span></a></li>
+					<li ng-class="activeView === 'hottest' ? 'active' : ''"><a ng-href="#/main/hottest"><span class="hottest">Hottest</span></a></li>
+					<li ng-class="activeView === 'coldest' ? 'active' : ''"><a ng-href="#/main/coldest"><span class="coldest">Coldest</span></a></li>
+					<li ng-class="activeView === 'consensus' ? 'active' : ''"><a ng-href="#/main/consensus"><span class="consensus">Consensus</span></a></li>
+					<li ng-class="activeView === 'filers' ? 'active' : ''"><a ng-href="#/main/filers"><span class="filers">Filers</span></a></li>
+                </ul>
+			</div>
+    	</div>
+    </div>

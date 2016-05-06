@@ -1,0 +1,123 @@
+/*
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+*/
+
+.hottest
+{
+	// color: #FF384E;
+	// color: #bd362f;
+	color: #51a351;
+}
+
+.coldest
+{
+	// color: #2f96b4;
+	color: #51a351;
+}
+
+.consensus
+{
+	// color: #E8AA4C;
+	// color: orange;
+	color: #51a351;
+}
+
+.filers
+{
+	color: #51a351;
+}
+
+.title
+{
+	color: #298A08;
+	font-variant: small-caps;
+}
+
+.dollar
+{
+	color: #C5B358;
+}
+
+ol li.list-group-item 
+{ 
+    list-style: decimal inside;
+    display: list-item;
+}
+
+a
+{
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+a:link
+{
+	color: #000;
+	text-decoration: none;
+}
+
+a:visited
+{
+	color: #000;
+	text-decoration: none;
+}
+
+a:hover
+{
+	color: #000;
+	text-decoration: none;
+}
+
+a:active
+{
+	color: #000;
+	text-decoration: none;
+}
+
+.tableHeader a
+{
+	color: #000;
+	text-decoration: none;
+}
+
+.tableHeader a:link
+{
+	color: #000;
+	text-decoration: none;
+}
+
+.tableHeader a:visited
+{
+	color: #000;
+	text-decoration: none;
+}
+
+.tableHeader a:hover
+{
+	color: #000;
+	text-decoration: none;
+}
+
+.tableHeader a:active
+{
+	color: #000;
+	text-decoration: none;
+}
+
+.primaryButtonText
+{
+	color: #fff;
+}
+
+.successButtonText
+{
+	color: #fff;
+}

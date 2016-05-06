@@ -1,0 +1,94 @@
+<div class="container">
+	<div ng-include="'navigationbar.html'"/>
+ 	<div class="row">
+ 		<div class="col-md-12" ng-show="activeView === 'hottest'">
+ 			<h3 class="visible-xs-block text-center hottest">Hottest</h3>
+			<form class="form">
+				<div class="form-group">
+      				<input ng-model="query" type="text" placeholder="Filter" class="form-control" autofocus>
+      			</div>
+    		</form>
+    		<div class="list-group">
+			 	<a ng-href="/cusipView/{{holding._id.cusip}}/totalValueDifference/-" class="list-group-item" ng-repeat="holding in hottestHoldings | filter:query">
+			 		<span class="col-md-2 text-right">{{holding.value.rank}}.&nbsp;</span>
+			 		<span class="col-md-10">
+					{{holding.value.nameOfIssuer}}
+			      	<span ng-if="holding.value.ticker">
+				      	&nbsp;({{holding.value.ticker}})
+			      	</span>
+			 		&nbsp;
+			 		</span>
+					<br />
+			      	<span class="badge btn btn-success">${{holding.value.totalValueDifference | number:0}},000</span>
+					<br />
+			 	</a>
+			</div>
+		</div>
+ 		<div class="col-md-12" ng-show="activeView === 'coldest'">
+ 			<h3 class="visible-xs-block text-center coldest">Coldest</h3>
+			<form class="form">
+				<div class="form-group">
+      				<input ng-model="query" type="text" placeholder="Filter" class="form-control" autofocus>
+      			</div>
+    		</form>
+		 	<ul class="list-group">
+		 		<a ng-href="/cusipView/{{holding._id.cusip}}/totalValueDifference/+"  class="list-group-item" ng-repeat="holding in coldestHoldings | filter:query">
+			 		<span class="col-md-2 text-right">{{holding.value.rank}}.&nbsp;</span>
+			 		<span class="col-md-10">
+					{{holding.value.nameOfIssuer}}
+			      	<span ng-if="holding.value.ticker">
+				      	&nbsp;({{holding.value.ticker}})
+			      	</span>
+			 		&nbsp;
+			 		</span>
+					<br />
+			      	<span class="badge btn btn-success">(${{-1*holding.value.totalValueDifference | number:0}},000)</span>
+			      	<br />
+		 		</a>
+		 	</ul>
+		</div> 
+ 		<div class="col-md-12" ng-show="activeView === 'consensus'">
+ 			<h3 class="visible-xs-block text-center consensus">Consensus</h3>
+			<form class="form">
+				<div class="form-group">
+      				<input ng-model="query" type="text" placeholder="Filter" class="form-control" autofocus>
+      			</div>
+    		</form>
+		 	<ul class="list-group">
+		 		<a ng-href="/cusipView/{{holding._id.cusip}}/currentValue/-" class="list-group-item" ng-repeat="holding in consensusHoldings | filter:query">
+			 		<span class="col-md-2 text-right">{{holding.value.rank}}.&nbsp;</span>
+			 		<span class="col-md-10">
+					{{holding.value.nameOfIssuer}}
+			      	<span ng-if="holding.value.ticker">
+				      	&nbsp;({{holding.value.ticker}})
+			      	</span>
+			 		&nbsp;
+			 		</span>
+					<br />
+			      	<span class="badge btn btn-success">{{holding.value.totalCurrentValue * 100.0 / holdingsTotals.totalCurrentValue | number:3 }}%</span>
+			      	<br />
+		 		</a>
+		 	</ul>
+		</div> 
+ 		<div class="col-md-12 file" ng-show="activeView === 'filers'">
+ 			<h3 class="visible-xs-block text-center filers">Filers</h3>
+			<form class="form">
+				<div class="form-group">
+      				<input ng-model="query" type="text" placeholder="Filter" class="form-control" autofocus>
+      			</div>
+    		</form>
+		 	<div class="list-group">
+		 		<a ng-href="/filerView/{{filer._id.cik}}" class="list-group-item" ng-repeat="filer in filers | filter:query | limitTo: rowsPerPage * page | limitTo: rowsPerPage * page < rowCount ? -rowsPerPage : -(rowsPerPage - (rowsPerPage * page - rowCount))">{{filer.filingManagerName}}</a>
+		 	</div>
+   			<div class="text-center">
+    			<ul class="pagination">
+   					<li ng-repeat="i in pageRange" ng-show="i <= -1*Math.floor(-1*(filers | filter:query).length/rowsPerPage)">
+   						<a ng-href="#" ng-click="setPage(i)" onclick="return false;">
+    						<span class="filers">{{i}}</span>
+   						</a>
+   					</li>
+   				</ul>
+   			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  form(name="testedgarpostfilings" action="/edgar/filings/batch" method="post")
+    div
+      textarea(id="filings", name="filings", type="text")
+    div
+      input(type="submit", value="Submit")
+ 
+  script.
+    $(document).ready(function() 
+    { 
+      $.get("/edgar/filings", function(result)
+      {
+        $("#filings").val(function(index, text) 
+        { 
+          return JSON.stringify(result); 
+        });
+      });
+    });
+  
